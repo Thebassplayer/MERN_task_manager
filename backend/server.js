@@ -2,6 +2,7 @@ const dotenv = require("dotenv").config();
 const express = require("express");
 const connectDB = require("./config/connectDB");
 const taskRoutes = require("./routes/taskRoutes");
+const getCurrentDateTime = require("./helpers/getActualTime");
 
 //Init express
 const app = express();
@@ -17,7 +18,11 @@ app.get("/", (req, res) => {
 //Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(taskRoutes);
+app.use((req, res, next) => {
+  console.log(` - Request date: ${getCurrentDateTime()} - `); // Output: dd/mm/yyyy
+  next();
+});
+app.use("/api/tasks", taskRoutes);
 
 //Start server
 const startServer = async () => {
