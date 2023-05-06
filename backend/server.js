@@ -23,6 +23,7 @@ app.use((req, res, next) => {
   next();
 });
 app.use("/api/tasks", taskRoutes);
+// app.use(cors());
 
 //Start server
 const startServer = async () => {
