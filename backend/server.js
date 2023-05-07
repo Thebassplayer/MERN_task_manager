@@ -3,7 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const connectDB = require("./config/connectDB");
 const taskRoutes = require("./routes/taskRoutes");
-const errorController = require("./controllers/errorController");
+// const errorController = require("./controllers/errorController");
 const getCurrentDateTime = require("./helpers/getActualTime");
 
 //Init express
@@ -25,8 +25,8 @@ app.use((req, res, next) => {
   console.log(` - Request date: ${getCurrentDateTime()} - `); // Output: dd/mm/yyyy
   next();
 });
+// app.use(errorController);
 app.use("/api/tasks", taskRoutes);
-app.use(errorController);
 
 //Start server
 const startServer = async () => {

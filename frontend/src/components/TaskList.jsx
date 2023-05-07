@@ -25,6 +25,7 @@ const TaskList = () => {
       }
       await axios.post("http://localhost:5002/api/tasks", formData);
       setFormData({ ...formData, name: "" });
+      toast.success("Task created");
     } catch (error) {
       const errorMessage = error.response.data;
       toast.error(errorMessage);
