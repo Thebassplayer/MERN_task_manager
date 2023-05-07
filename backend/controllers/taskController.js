@@ -8,7 +8,6 @@ const createTask = async (req, res) => {
     res.status(200).json(task);
     console.log(req.body);
   } catch (error) {
-    console.log("---- Error from controller", error);
     res.status(500).json(error.errors.name.message);
   }
 };
@@ -19,7 +18,7 @@ const getTasks = async (req, res) => {
     const tasks = await Task.find();
     res.status(200).json(tasks);
   } catch (error) {
-    res.status(500).json({ msg: error });
+    res.status(500).json(error.errors.name.message);
   }
 };
 
@@ -34,7 +33,7 @@ const getTaskById = async (req, res) => {
     }
     res.status(200).json(task);
   } catch (error) {
-    res.status(500).json({ msg: error });
+    res.status(500).json(error.errors.name.message);
   }
 };
 
@@ -48,7 +47,7 @@ const deleteTaskById = async (req, res) => {
     }
     res.status(200).send("Task deleted");
   } catch (error) {
-    res.status(500).json({ msg: error });
+    res.status(500).json(error.errors.name.message);
   }
 };
 
@@ -69,7 +68,7 @@ const updateTaskById = async (req, res) => {
     }
     res.status(200).json(task);
   } catch (error) {
-    res.status(500).json({ msg: error });
+    res.status(500).json(error.errors.name.message);
   }
 };
 

@@ -17,23 +17,18 @@ const TaskList = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const createTask = e => {
+  const createTask = async e => {
     e.preventDefault();
     try {
       if (name === "") {
         return toast.error("Please enter a task name");
       }
-      axios
-        .post("http://localhost:5002/api/tasks", formData)
-        .then(function (response) {
-          console.log(response);
-        })
-        .catch(function (error) {
-          console.log("-----", error.response.data.msg);
-          toast.error(error.message);
-        });
+      await axios.post("http://localhost:5002/api/tasks", formData);
       setFormData({ ...formData, name: "" });
-    } catch (error) {}
+    } catch (error) {
+      const errorMessage = error.response.data;
+      toast.error(errorMessage);
+    }
   };
 
   return (
