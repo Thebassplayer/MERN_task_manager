@@ -8,7 +8,8 @@ const createTask = async (req, res) => {
     res.status(200).json(task);
     console.log(req.body);
   } catch (error) {
-    res.status(500).json({ msg: error });
+    console.log("---- Error from controller", error);
+    res.status(500).json(error.errors.name.message);
   }
 };
 

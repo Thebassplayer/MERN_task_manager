@@ -19,15 +19,21 @@ const TaskList = () => {
 
   const createTask = e => {
     e.preventDefault();
-    if (name === "") {
-      return toast.error("Please enter a task name");
-    }
     try {
-      axios.post("http://localhost:5002/api/tasks", formData);
+      if (name === "") {
+        return toast.error("Please enter a task name");
+      }
+      axios
+        .post("http://localhost:5002/api/tasks", formData)
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log("-----", error.response.data.msg);
+          toast.error(error.message);
+        });
       setFormData({ ...formData, name: "" });
-    } catch (error) {
-      toast.error(error.message);
-    }
+    } catch (error) {}
   };
 
   return (
